@@ -1,32 +1,18 @@
 #ifndef STACK_H
 #define STACK_H
 
-// Stack
-
-// Stores integer values inside
-// Change it to desired type
-typedef int Data;
-
 struct Stack;
 
-// Creates empty stack
-Stack *stack_create();
+Stack* stack_create();
 
-// Deletes the stack
-void stack_delete(Stack *stack);
+void stack_delete(Stack* s);
 
-// Pushes data on top of the stack
-// Should be O(1) on average
-void stack_push(Stack *stack, Data data);
+void stack_push(Stack* s, int data);
 
-// Retrieves the last element from the stack
-Data stack_get(const Stack *stack);
+int stack_get(const Stack* s);
 
-// Removes the last element from the stack
-// Should be O(1)
-void stack_pop(Stack *stack);
+void stack_pop(Stack* s);
 
-// Returns true if the stack is empty
-bool stack_empty(const Stack *stack);
+bool stack_empty(const Stack* s);
 
 #endif
