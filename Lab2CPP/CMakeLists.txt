@@ -17,5 +17,5 @@ set_property(TEST TestLab2_Nested PROPERTY PASS_REGULAR_EXPRESSION "YES")
 add_test(NAME TestLab2_Unclosed COMMAND lab2 ${CMAKE_CURRENT_SOURCE_DIR}/input5.txt)
 set_property(TEST TestLab2_Unclosed PROPERTY PASS_REGULAR_EXPRESSION "NO")
 
-add_test(NAME TestLab2_Mismatch COMMAND lab2 ${CMAKE_CURRENT_SOURCE_DIR}/input7.txt)
+add_test(NAME TestLab2_Mismatch COMMAND lab2 ${CMAKE_CURRENT_SOURCE_DIR}/input6.txt)
 set_property(TEST TestLab2_Mismatch PROPERTY PASS_REGULAR_EXPRESSION "NO")
