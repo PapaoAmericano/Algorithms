@@ -1,62 +1,35 @@
 #include "vector.h"
 
-struct Vector
+int main()
 {
-    int* data;
-    size_t size;
-    size_t capacity;
-};
+    Vector* v = vector_create();
 
-Vector *vector_create()
-{
-    Vector* vector = new Vector;
-    vector->capacity = 4;
-    vector->size = 0;
-    vector->data = new int[vector->capacity];
+    vector_resize(v, 5);
+    if (vector_size(v) != 5) 
+        return 1;
 
-    return new Vector;
-}
+    for (size_t i = 0; i < vector_size(v); ++i)
+        vector_set(v, i, (int)i * 2);
 
-void vector_delete(Vector *vector)
-{
-    delete[] vector->data;
-    delete vector;
-}
+    for (size_t i = 0; i < vector_size(v); ++i)
+        if (vector_get(v, i) != (int)i * 2) 
+            return 1;
 
-Data vector_get(const Vector *vector, size_t index)
-{
-    if (index >= vector->size) 
-        return 0;
+    vector_resize(v, 100);
+    if (vector_size(v) != 100) 
+        return 1;
 
-    return vector->data[index];
-}
+    for (size_t i = 0; i < 100; ++i)
+        vector_set(v, i, (int)i);
 
-void vector_set(Vector *vector, size_t index, Data value)
-{
-    if (index < vector->size)
-        vector->data[index] = value;
-}
+    for (size_t i = 0; i < 100; ++i)
+        if (vector_get(v, i) != (int)i) 
+            return 1;
 
-size_t vector_size(const Vector *vector)
-{
-    return vector->size;
-}
+    vector_resize(v, 3);
+    if (vector_size(v) != 3) 
+        return 1;
 
-void vector_resize(Vector *vector, size_t size)
-{
-    if (size > vector->capacity) {
-        size_t new_cap = vector->capacity * 2;
-        while (new_cap < size) 
-            new_cap *= 2;
-
-        int* new_data = new int[new_cap];
-        for (size_t i = 0; i < vector->size; ++i)
-            new_data[i] = vector->data[i];
-
-        delete[] vector->data;
-        vector->data = new_data;
-        vector->capacity = new_cap;
-    }
-
-    vector->size = size;
+    vector_delete(v);
+    return 0;
 }
