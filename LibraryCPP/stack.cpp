@@ -1,35 +1,38 @@
 #include "stack.h"
+#include "vector.h"
 
-int main()
-{
-    Stack* s = stack_create();
+struct Stack {
+    Vector* v;
+};
 
-    stack_push(s, 1);
-    stack_push(s, 2);
-    stack_push(s, 3);
+Stack* stack_create() {
+    Stack* s = new Stack;
+    s->v = vector_create();
+    return s;
+}
 
-    if (stack_get(s) != 3) 
-        return 1;
-    
-    stack_pop(s);
-    if (stack_get(s) != 2) 
-        return 1;
-    
-    stack_pop(s);
-    if (stack_get(s) != 1) 
-        return 1;
-    
-    stack_pop(s);
-    if (!stack_empty(s)) 
-        return 1;
+void stack_delete(Stack* s) {
+    vector_delete(s->v);
+    delete s;
+}
 
-    stack_push(s, 42);
-    if (stack_empty(s)) 
-        return 1;
-    
-    if (stack_get(s) != 42) 
-        return 1;
+void stack_push(Stack* s, int data) {
+    size_t n = vector_size(s->v);
+    vector_resize(s->v, n + 1);
+    vector_set(s->v, n, data);
+}
 
-    stack_delete(s);
-    return 0;
+int stack_get(const Stack* s) {
+    size_t n = vector_size(s->v);
+    if (n == 0) return 0;
+    return vector_get(s->v, n - 1);
+}
+
+void stack_pop(Stack* s) {
+    size_t n = vector_size(s->v);
+    if (n > 0) vector_resize(s->v, n - 1);
+}
+
+bool stack_empty(const Stack* s) {
+    return vector_size(s->v) == 0;
 }
