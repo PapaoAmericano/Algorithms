@@ -3,6 +3,7 @@
 
 int main(int argc, char** argv) {
     FILE* input = fopen(argv[1], "r");
+    if (!input) return 1;
 
     Stack* stack = stack_create();
     int ok = 1;
