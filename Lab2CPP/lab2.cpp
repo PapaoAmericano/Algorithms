@@ -20,9 +20,9 @@ int main(int argc, char** argv) {
             int top = stack_get(stack);
             stack_pop(stack);
 
-            if (c == ')' && top != '(') { ok = 0; break; }
-            if (c == ']' && top != '[') { ok = 0; break; }
-            if (c == '}' && top != '{') { ok = 0; break; }
+            if (c == ')' && top != '(') { ok = false; break; }
+            if (c == ']' && top != '[') { ok = false; break; }
+            if (c == '}' && top != '{') { ok = false; break; }
         }
     }
 
